@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="data"
+            type="com.example.appdemo.roomDb.UserInfo" />
+
+        <variable
+            name="callback"
+            type="com.example.appdemo.common.BaseListItemCallback" />
+
+    </data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Name TextView -->
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:paddingEnd="8dp"
+            android:text="@{data.name}"
+            android:textSize="16sp" />
+
+        <!-- Phone Number TextView -->
+        <TextView
+            android:id="@+id/textViewPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:paddingEnd="8dp"
+            android:text="@{data.phoneNum.toString()}"
+            android:textSize="16sp" />
+
+        <!-- Country TextView -->
+        <TextView
+            android:id="@+id/textViewCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:paddingEnd="8dp"
+            android:text="@{data.country}"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+    <!-- Delete Button -->
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Delete item"
+        android:paddingStart="8dp"
+        android:text="Delete"
+        android:onClick="@{()->callback.onItemClicked(data)}"
+        android:textColor="#FF0000"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
