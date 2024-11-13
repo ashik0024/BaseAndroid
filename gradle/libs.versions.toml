@@ -87,6 +87,7 @@ firebase-in-app-message-version = "21.0.0"
 firebase-crashlytics-version = "19.0.2"
 firebase-crashlytics-plugin-version = "3.0.2"
 firebase-appdistribution-plugin-version = "5.0.0"
+roomTesting = "2.6.1"
 
 #########################################################  LIBRARIES  ############################################################
 
@@ -225,6 +226,7 @@ firebase-core = { group = "com.google.firebase", name = "firebase-core", version
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx", version.ref = "firebase-analytics-version" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx", version.ref = "firebase-crashlytics-version" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebase-firestore-version" }
+androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "roomTesting" }
 
 
 [plugins]

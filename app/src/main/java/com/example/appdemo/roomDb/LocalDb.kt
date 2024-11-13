@@ -31,7 +31,7 @@ abstract class LocalDb : RoomDatabase() {
 
     // Manual migration from version 3 to version 4
     companion object {
-        private val migration3to4 = object : Migration(3, 4) {
+         val migration3to4 = object : Migration(3, 4) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 // Create the PlayerInfo table with nullable playerName column
                 db.execSQL(
