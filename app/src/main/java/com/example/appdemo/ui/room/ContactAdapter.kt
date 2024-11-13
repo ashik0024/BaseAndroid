@@ -1,11 +1,8 @@
-package com.example.appdemo
+package com.example.appdemo.ui.room
 
-import android.widget.Button
-import android.widget.TextView
+import com.example.appdemo.R
 import com.example.appdemo.common.BaseListItemCallback
 import com.example.appdemo.common.MyBaseAdapter
-import com.example.appdemo.common.MyViewHolder
-import com.example.appdemo.common.ProviderIconCallback
 import com.example.appdemo.roomDb.UserInfo
 
 
