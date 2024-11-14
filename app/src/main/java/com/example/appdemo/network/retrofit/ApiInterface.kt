@@ -1,10 +1,7 @@
-package com.example.appdemo.Network.Retrofit
+package com.example.appdemo.network.retrofit
 
-import com.example.appdemo.Network.ReponseClass.PokemonListResponse
-import retrofit2.http.Body
+import com.example.appdemo.network.responseClass.PokemonListResponse
 import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
 
 interface ApiInterface {
 

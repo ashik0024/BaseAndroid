@@ -1,4 +1,4 @@
-package com.example.appdemo.Network
+package com.example.appdemo.network
 
 sealed class Result<out T> {
     object Loading : Result<Nothing>()  // Add a loading state

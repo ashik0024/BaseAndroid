@@ -1,8 +1,8 @@
-package com.example.appdemo.ui.ApiNonPaging
+package com.example.appdemo.ui.apiNonPaging
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.appdemo.Network.Repository.GetPokemonService
+import com.example.appdemo.network.repository.GetPokemonService
 
 class PokemonViewModelFactory(private val getPokemonService: GetPokemonService) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

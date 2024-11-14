@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_room" />
     <fragment
         android:id="@+id/nonPagingFragment"
-        android:name="com.example.appdemo.ui.ApiNonPaging.PokemonDataFragment"
+        android:name="com.example.appdemo.ui.apiNonPaging.PokemonDataFragment"
         android:label="Room Fragment"
         tools:layout="@layout/fragment_pokemon_data" />
 </navigation>

@@ -1,10 +1,11 @@
-package com.example.appdemo.Network.Repository
+package com.example.appdemo.network.repository
 
-import com.example.appdemo.Network.ReponseClass.PokemonListResponse
-import com.example.appdemo.Network.Retrofit.RetrofitClient
+import com.example.appdemo.network.responseClass.PokemonListResponse
+import com.example.appdemo.network.retrofit.RetrofitClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.example.appdemo.Network.Result
+import com.example.appdemo.network.Result
+import com.example.appdemo.network.responseClass.Pokemon
 import okhttp3.ResponseBody.Companion.toResponseBody
 
 import java.io.IOException
@@ -14,29 +15,56 @@ import retrofit2.Response
 class GetPokemonService {
 
     // Function to fetch Pokemon data from the network
-    suspend fun getPokemonData(): Result<PokemonListResponse> {
+    suspend fun getPokemonData(): Result<List<Pokemon>> {
         return withContext(Dispatchers.IO) {
             try {
-
+                // Make the API call and get the response
                 val response = RetrofitClient.apiService.getPokemon()
-                Result.Success(response)
-            } catch (e: IOException) {
 
+                // If the response is successful, return the list of Pokemon
+                response.results?.let {
+                    Result.Success(it)  // Return the list of Pokemon from the results
+                } ?: Result.Error(Exception("Empty response, no Pokemon data available"))
+
+            } catch (e: IOException) {
                 // Handle network errors (e.g., no internet connection)
                 Result.Error(IOException("Network error, please check your connection", e))
             } catch (e: HttpException) {
-
                 // Handle HTTP errors (e.g., 404, 500 errors)
                 val errorMessage = e.response()?.errorBody()?.string()
                     ?: "An unexpected HTTP error occurred"
                 Result.Error(HttpException(e.response() ?: Response.error<Any>(500, "".toResponseBody())))
             } catch (e: Exception) {
-
                 // Handle any other unexpected errors
                 Result.Error(Exception("An unknown error occurred", e))
             }
         }
     }
+
+
+//    suspend fun getPokemonData(): Result<PokemonListResponse> {
+//        return withContext(Dispatchers.IO) {
+//            try {
+//
+//                val response = RetrofitClient.apiService.getPokemon()
+//                Result.Success(response)
+//            } catch (e: IOException) {
+//
+//                // Handle network errors (e.g., no internet connection)
+//                Result.Error(IOException("Network error, please check your connection", e))
+//            } catch (e: HttpException) {
+//
+//                // Handle HTTP errors (e.g., 404, 500 errors)
+//                val errorMessage = e.response()?.errorBody()?.string()
+//                    ?: "An unexpected HTTP error occurred"
+//                Result.Error(HttpException(e.response() ?: Response.error<Any>(500, "".toResponseBody())))
+//            } catch (e: Exception) {
+//
+//                // Handle any other unexpected errors
+//                Result.Error(Exception("An unknown error occurred", e))
+//            }
+//        }
+//    }
 }
 
 //class PackPaymentMethodService @Inject constructor (

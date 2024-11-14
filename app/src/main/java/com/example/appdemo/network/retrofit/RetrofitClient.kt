@@ -1,4 +1,4 @@
-package com.example.appdemo.Network.Retrofit
+package com.example.appdemo.network.retrofit
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

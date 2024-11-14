@@ -1,9 +1,9 @@
-package com.example.appdemo.Network.Repository
+package com.example.appdemo.network.repository
 
 import java.io.IOException
 import retrofit2.HttpException
 import retrofit2.Response
-import com.example.appdemo.Network.Result
+import com.example.appdemo.network.Result
 import okhttp3.ResponseBody.Companion.toResponseBody
 
 open class BaseRepository {
