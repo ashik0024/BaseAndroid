@@ -27,10 +27,7 @@ class PokemonAdapter(
         obj.let {
 
             val name = holder.itemView.findViewById<TextView>(R.id.name)
-            val details = holder.itemView.findViewById<TextView>(R.id.details)
-
-            name.text = obj.name?:"test1"
-            details.text = obj.url?:"test2"
+            name.text = obj.name?:"test"
         }
 
     }
