@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_home_to_nonPaging"
             app:destination="@id/nonPagingFragment" />
+        <action
+            android:id="@+id/action_home_to_paging"
+            app:destination="@id/pagingFragment" />
     </fragment>
 
     <fragment
@@ -25,7 +28,12 @@
     <fragment
         android:id="@+id/nonPagingFragment"
         android:name="com.example.appdemo.ui.apiNonPaging.PokemonDataFragment"
-        android:label="Room Fragment"
+        android:label="Non Paging Fragment"
         tools:layout="@layout/fragment_pokemon_data" />
+    <fragment
+        android:id="@+id/pagingFragment"
+        android:name="com.example.appdemo.ui.apiPaging.PokemonDataPagingFragment"
+        android:label="paging Fragment"
+        tools:layout="@layout/fragment_pokemon_data_paging" />
 </navigation>
 

@@ -31,5 +31,8 @@ class HomeFragment : Fragment() {
         binding?.apiTv?.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_nonPaging)
         }
+        binding?.pagingApiTv?.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_paging)
+        }
     }
 }

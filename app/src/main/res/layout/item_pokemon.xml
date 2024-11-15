@@ -2,6 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+        <data>
+            <variable
+                name="data"
+                type="com.example.appdemo.network.responseClass.Pokemon" />
+
+
+        </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,6 +26,7 @@
             android:textColor="?attr/colorOnSurface"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:text="@{data.name}"
             tools:text="Test"
             android:textAllCaps="true"
             android:background="?attr/selectableItemBackground" />

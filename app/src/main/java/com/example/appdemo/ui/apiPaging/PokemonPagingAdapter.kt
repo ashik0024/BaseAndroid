@@ -1,4 +1,4 @@
-package com.example.appdemo.ui.apiNonPaging
+package com.example.appdemo.ui.apiPaging
 
 
 import android.graphics.Paint
@@ -13,7 +13,7 @@ import com.example.appdemo.common.MyBaseAdapter
 import com.example.appdemo.common.MyViewHolder
 import com.example.appdemo.network.responseClass.Pokemon
 
-class PokemonAdapter(
+class PokemonPagingAdapter(
     cb: BaseListItemCallback<Pokemon>
 ) : MyBaseAdapter<Pokemon>(cb) {
 
@@ -21,14 +21,4 @@ class PokemonAdapter(
         return R.layout.item_pokemon
     }
 
-//    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//        super.onBindViewHolder(holder, position)
-//        val obj = getItem(position)
-//        obj.let {
-//
-//            val name = holder.itemView.findViewById<TextView>(R.id.name)
-//            name.text = obj.name?:"test"
-//        }
-//
-//    }
 }
