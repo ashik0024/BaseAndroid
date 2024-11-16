@@ -1,5 +1,6 @@
 package com.example.appdemo.ui.apiPaging
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,10 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.appdemo.network.Result
 import com.example.appdemo.network.repository.GetPokemonPagingService
 import com.example.appdemo.network.responseClass.Pokemon
+import com.example.appdemo.roomDb.UserInfoDao
 import kotlinx.coroutines.launch
 
 class PokemonDataPagingViewModel(
-    private val getPokemonPagingService: GetPokemonPagingService
+    private val getPokemonPagingService: GetPokemonPagingService,
+    private val dao: UserInfoDao
 ):ViewModel() {
 
     private val _pokemonDataPaging = MutableLiveData<Result<List<Pokemon>>>()
@@ -23,6 +26,18 @@ class PokemonDataPagingViewModel(
 
             val result = getPokemonPagingService.getPokemonPagingData(limit,offset)
             _pokemonDataPaging.value = result
+        }
+    }
+
+    fun saveToDatabase(pokemonList: List<Pokemon>) {
+        viewModelScope.launch {
+            dao.insertAll(pokemonList)
+        }
+    }
+    fun getAllPlayerInfo() {
+        viewModelScope.launch {
+            Log.d("getAllPlayerInfo", ": "+dao.getAllPokemonInfo())
+
         }
     }
 }

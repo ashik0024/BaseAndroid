@@ -17,6 +17,8 @@ import com.example.appdemo.network.Result
 import com.example.appdemo.network.repository.GetPokemonPagingService
 import com.example.appdemo.network.repository.GetPokemonService
 import com.example.appdemo.network.responseClass.Pokemon
+import com.example.appdemo.roomDb.LocalDb
+import com.example.appdemo.roomDb.UserInfoDao
 import com.example.appdemo.ui.apiNonPaging.PokemonAdapter
 import com.example.appdemo.ui.apiNonPaging.PokemonViewModel
 import com.example.appdemo.ui.apiNonPaging.PokemonViewModelFactory
@@ -28,6 +30,8 @@ class PokemonDataPagingFragment : Fragment(),BaseListItemCallback<Pokemon> {
     private val binding get() = _binding
     private lateinit var pokemonViewModel:PokemonDataPagingViewModel
     private lateinit var pokemonPagingAdapter:PokemonPagingAdapter
+    private lateinit var userInfoDao: UserInfoDao
+
 
 
     override fun onCreateView(
@@ -39,9 +43,10 @@ class PokemonDataPagingFragment : Fragment(),BaseListItemCallback<Pokemon> {
 
         // Initialize GetPokemonService (replace with DI or actual service initialization)
         val getPokemonPagingService = GetPokemonPagingService()
+        userInfoDao = LocalDb.getDatabase(requireContext()).dao
 
         // Initialize the ViewModel
-        pokemonViewModel = ViewModelProvider(this, PokemonPagingViewModelFactory(getPokemonPagingService))
+        pokemonViewModel = ViewModelProvider(this, PokemonPagingViewModelFactory(getPokemonPagingService,userInfoDao))
             .get(PokemonDataPagingViewModel::class.java)
         return binding?.root
     }
@@ -57,6 +62,7 @@ class PokemonDataPagingFragment : Fragment(),BaseListItemCallback<Pokemon> {
 
         observeData()
         pokemonViewModel.fetchPokemonDataPaging(10,0)
+        pokemonViewModel.getAllPlayerInfo()
     }
     private fun observeData() {
         // Observe the LiveData from the ViewModel
@@ -64,12 +70,13 @@ class PokemonDataPagingFragment : Fragment(),BaseListItemCallback<Pokemon> {
             when (result) {
                 is Result.Success -> {
                     val pokemonList = result.data
-                    Toast.makeText(requireContext(), "Success: ${pokemonList.size}", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(requireContext(), "Success: ${pokemonList.size}", Toast.LENGTH_LONG).show()
                     pokemonPagingAdapter.removeAll()
                     pokemonPagingAdapter.addAll(pokemonList)
-
-                    Log.d("PokemonData1", "Response: ${result.data}")
-                    Log.d("PokemonData2", "Response: "+pokemonList)
+                    pokemonViewModel.saveToDatabase(pokemonList)
+                    Log.d("PokemonData2", "Response: "+ pokemonViewModel.saveToDatabase(pokemonList))
+//                    Log.d("PokemonData1", "Response: ${result.data}")
+//                    Log.d("PokemonData2", "Response: "+pokemonList)
                 }
                 is Result.Error -> {
                     // Handle error

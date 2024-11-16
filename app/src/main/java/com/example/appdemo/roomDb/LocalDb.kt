@@ -10,12 +10,13 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.AutoMigrationSpec
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.appdemo.network.responseClass.Pokemon
 import com.google.firebase.firestore.auth.User
 
 
 @Database(
-    entities = [UserInfo::class, PlayerInfo::class],
-    version = 4,
+    entities = [UserInfo::class, PlayerInfo::class,Pokemon::class],
+    version = 5,
     autoMigrations = [
         AutoMigration(from = 1, to = 2),
         AutoMigration(from = 2, to = 3, spec = LocalDb.Migration2To3::class)
@@ -41,6 +42,17 @@ abstract class LocalDb : RoomDatabase() {
                 )
             }
         }
+        val migration4to5 = object : Migration(4, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                // Create the PlayerInfo table with nullable playerName column
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS pokemon_table  (" +
+                            "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                            "name TEXT,"+
+                            "url TEXT)"
+                )
+            }
+        }
 
         @Volatile
         private var INSTANCE: LocalDb? = null
@@ -52,7 +64,7 @@ abstract class LocalDb : RoomDatabase() {
                     LocalDb::class.java,
                     "local_database"
                 )
-                    .addMigrations(migration3to4)
+                    .addMigrations(migration3to4,migration4to5)
                     .build()
                 INSTANCE = instance
                 instance

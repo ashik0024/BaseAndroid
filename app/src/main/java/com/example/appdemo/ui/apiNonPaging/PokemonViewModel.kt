@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import com.example.appdemo.network.Result
 import com.example.appdemo.network.repository.GetPokemonService
 import com.example.appdemo.network.responseClass.Pokemon
+import com.example.appdemo.roomDb.UserInfoDao
 
 class PokemonViewModel(private val getPokemonService: GetPokemonService) : ViewModel() {
 
@@ -27,4 +28,5 @@ class PokemonViewModel(private val getPokemonService: GetPokemonService) : ViewM
             _pokemonData.value = result
         }
     }
+
 }

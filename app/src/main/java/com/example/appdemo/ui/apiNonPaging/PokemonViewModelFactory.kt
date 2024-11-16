@@ -12,3 +12,4 @@ class PokemonViewModelFactory(private val getPokemonService: GetPokemonService) 
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
