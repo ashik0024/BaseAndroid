@@ -1,26 +1,17 @@
 package com.example.appdemo.network.repository
 
-import com.example.appdemo.network.responseClass.PokemonListResponse
 import com.example.appdemo.network.retrofit.RetrofitClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import com.example.appdemo.network.Result
 import com.example.appdemo.network.responseClass.Pokemon
-import okhttp3.ResponseBody.Companion.toResponseBody
 
-import java.io.IOException
-import retrofit2.HttpException
-import retrofit2.Response
 
 class GetPokemonService {
 
     // Function to fetch Pokemon data from the network
     suspend fun getPokemonData(): Result<List<Pokemon>> {
         return safeApiCall {
-            // Make the API call and return the response directly
-            val response = RetrofitClient.apiService.getPokemon()
 
-            // Check for non-null results
+            val response = RetrofitClient.apiService.getPokemon()
             response.results ?: throw Exception("Empty response, no Pokemon data available")
         }
     }

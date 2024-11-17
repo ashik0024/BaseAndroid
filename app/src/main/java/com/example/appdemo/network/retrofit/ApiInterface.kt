@@ -16,12 +16,4 @@ interface ApiInterface {
     @Query("offset") offset: Int
     ): PokemonListResponse
 
-
-//    @POST("/package-wise-data-pack/{isBlNumber}/{packageId}/{dbVersion}")
-//    suspend fun getPackPaymentMethods(
-//        @Path("isBlNumber") isBlNumber: Int,
-//        @Path("packageId") packId: Int,
-//        @Path("dbVersion") dbVersion: Int,
-//        @Body packPaymentMethodRequest: PackPaymentMethodRequest
-//    ): PackPaymentMethodResponse
 }

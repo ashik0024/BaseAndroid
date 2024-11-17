@@ -9,12 +9,17 @@ import com.example.appdemo.network.Result
 import com.example.appdemo.network.repository.GetPokemonPagingService
 import com.example.appdemo.network.responseClass.Pokemon
 import com.example.appdemo.roomDb.UserInfoDao
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PokemonDataPagingViewModel(
+
+
+@HiltViewModel
+class PokemonDataPagingViewModel  @Inject constructor(
     private val getPokemonPagingService: GetPokemonPagingService,
     private val dao: UserInfoDao
-):ViewModel() {
+) : ViewModel() {
 
     private val _pokemonDataPaging = MutableLiveData<Result<List<Pokemon>>>()
     val pokemonDataPaging: LiveData<Result<List<Pokemon>>> get() = _pokemonDataPaging
