@@ -72,6 +72,15 @@ class PokemonDataPagingFragment : Fragment(), ProviderIconCallback<Pokemon> {
                 if (isEndOfPagination) {
                     Toast.makeText(context, "No More Data Available", Toast.LENGTH_SHORT).show()
                 }
+
+                val errorState = loadStates.source.refresh as? LoadState.Error
+                    ?: loadStates.source.append as? LoadState.Error
+                    ?: loadStates.source.prepend as? LoadState.Error
+
+                errorState?.let { error ->
+                    binding?.emptyView?.text="Error: ${error.error.message}"
+
+                }
             }
         }
 

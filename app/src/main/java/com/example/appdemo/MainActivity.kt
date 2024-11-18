@@ -1,6 +1,7 @@
 package com.example.appdemo
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
 import com.example.appdemo.databinding.ActivityMainBinding
@@ -26,6 +27,9 @@ class MainActivity : AppCompatActivity(){
         val config = ClarityConfig("ow8fm7j9qk")
         Clarity.initialize(applicationContext, config)
 
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE
+        )
     }
 
 }
