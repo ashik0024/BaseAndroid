@@ -7,24 +7,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appdemo.R
 import com.example.appdemo.common.BaseListItemCallback
+import com.example.appdemo.common.ProviderIconCallback
 import com.example.appdemo.databinding.FragmentPokemonDataPagingBinding
 import com.example.appdemo.network.Result
 import com.example.appdemo.network.responseClass.Pokemon
 import com.example.appdemo.roomDb.UserInfoDao
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
-class PokemonDataPagingFragment : Fragment(),BaseListItemCallback<Pokemon> {
+class PokemonDataPagingFragment : Fragment(), ProviderIconCallback<Pokemon> {
 
     private var _binding:FragmentPokemonDataPagingBinding?=null
     private val binding get() = _binding
 
-    private lateinit var pokemonPagingAdapter:PokemonPagingAdapter
+
+    private lateinit var pokemonPagingAdapter: PokemonPagingAdapter<Pokemon>
     private lateinit var userInfoDao: UserInfoDao
     private val pokemonViewModel: PokemonDataPagingViewModel by viewModels()
 
@@ -46,34 +54,37 @@ class PokemonDataPagingFragment : Fragment(),BaseListItemCallback<Pokemon> {
             adapter = pokemonPagingAdapter
         }
 
-        observeData()
-        pokemonViewModel.fetchPokemonDataPaging(10,0)
+        observeData(limit = 10, 0)
+
         pokemonViewModel.getAllPlayerInfo()
-    }
-    private fun observeData() {
-        // Observe the LiveData from the ViewModel
-        pokemonViewModel.pokemonDataPaging.observe(viewLifecycleOwner, Observer { result ->
-            when (result) {
-                is Result.Success -> {
-                    val pokemonList = result.data
-                    pokemonPagingAdapter.removeAll()
-                    pokemonPagingAdapter.addAll(pokemonList)
-                    pokemonViewModel.saveToDatabase(pokemonList)
-                    Log.d("PokemonData2", "Response: "+ pokemonViewModel.saveToDatabase(pokemonList))
 
-                }
-                is Result.Error -> {
-                    // Handle error
-                    val error = result.exception
-                    Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_LONG).show()
-                }
-                is Result.Loading -> {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            pokemonPagingAdapter.loadStateFlow.collectLatest { loadStates ->
 
-                     Toast.makeText(requireContext(), "Loading", Toast.LENGTH_LONG).show()
+                val isLoading = loadStates.source.refresh is LoadState.Loading || loadStates.source.append is LoadState.Loading
+                val isEmpty = pokemonPagingAdapter.itemCount <= 0 && !loadStates.source.refresh.endOfPaginationReached
+                val isEndOfPagination = loadStates.source.append is LoadState.NotLoading && loadStates.source.append.endOfPaginationReached
+
+                binding?.emptyView?.isVisible = isEmpty && !isLoading
+                binding?.progressBar?.isVisible = isLoading
+                binding?.pokePagingRec?.isVisible = !(isEmpty && isLoading)
+
+                if (isEndOfPagination) {
+                    Toast.makeText(context, "No More Data Available", Toast.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
+
     }
+
+    private fun observeData(limit: Int, offset: Int) {
+        lifecycleScope.launch {
+            pokemonViewModel.loadPokemonData(limit, offset).collectLatest { pagingData ->
+                pokemonPagingAdapter.submitData(pagingData)
+            }
+        }
+    }
+
     override fun onItemClicked(item: Pokemon) {
         super.onItemClicked(item)
     }

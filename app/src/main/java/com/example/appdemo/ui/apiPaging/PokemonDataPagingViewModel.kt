@@ -5,11 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.appdemo.common.BaseListRepositoryImpl
+import com.example.appdemo.common.BaseNetworkPagingSource
 import com.example.appdemo.network.Result
 import com.example.appdemo.network.repository.GetPokemonPagingService
 import com.example.appdemo.network.responseClass.Pokemon
 import com.example.appdemo.roomDb.UserInfoDao
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,18 +26,16 @@ class PokemonDataPagingViewModel  @Inject constructor(
     private val dao: UserInfoDao
 ) : ViewModel() {
 
-    private val _pokemonDataPaging = MutableLiveData<Result<List<Pokemon>>>()
-    val pokemonDataPaging: LiveData<Result<List<Pokemon>>> get() = _pokemonDataPaging
-
-    fun fetchPokemonDataPaging(limit:Int,offset:Int) {
-        viewModelScope.launch {
-
-            _pokemonDataPaging.value = Result.Loading
-
-            val result = getPokemonPagingService.getPokemonPagingData(limit,offset)
-            _pokemonDataPaging.value = result
-        }
+    fun loadPokemonData(limit: Int, offset: Int): Flow<PagingData<Pokemon>> {
+        return BaseListRepositoryImpl({
+            BaseNetworkPagingSource(
+                getPokemonPagingService,
+                limit,
+                offset
+            )
+        }).getList(limit).cachedIn(viewModelScope)
     }
+
 
     fun saveToDatabase(pokemonList: List<Pokemon>) {
         viewModelScope.launch {

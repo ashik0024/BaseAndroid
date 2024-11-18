@@ -7,9 +7,10 @@ import androidx.paging.PagingSource
 import kotlinx.coroutines.flow.Flow
 
 class BaseListRepositoryImpl<T: Any> constructor(
-    private val pagingFactory: ()-> PagingSource<Int, T>,
+    private val pagingFactory: () -> PagingSource<Int, T>,
     private val remoteMediator: BaseRemoteMediator<T>? = null
-): BaseListRepository<T> {
+) : BaseListRepository<T> {
+
     override fun getList(pageSize: Int): Flow<PagingData<T>> {
         val finalPageSize = if (pageSize <= 0) 30 else pageSize
         return Pager(
@@ -18,9 +19,7 @@ class BaseListRepositoryImpl<T: Any> constructor(
                 enablePlaceholders = true,
                 initialLoadSize = finalPageSize,
                 prefetchDistance = finalPageSize / 3,
-//                maxSize = 2 * PAGE_SIZE
             ),
-//            remoteMediator = remoteMediator,
             pagingSourceFactory = pagingFactory
         ).flow
     }
