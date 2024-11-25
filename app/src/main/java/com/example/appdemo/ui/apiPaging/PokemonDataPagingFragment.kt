@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appdemo.R
@@ -96,5 +97,11 @@ class PokemonDataPagingFragment : Fragment(), ProviderIconCallback<Pokemon> {
 
     override fun onItemClicked(item: Pokemon) {
         super.onItemClicked(item)
+
+        val bundleData = Bundle().apply {
+            putString("name", item.name)
+            putString("id",item.id.toString())
+        }
+        findNavController().navigate(R.id.action_to_PokemonDetails,bundleData)
     }
 }

@@ -28,6 +28,9 @@ class HomeFragment : Fragment() {
         binding?.roomTv?.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_Room)
         }
+//        binding?.roomTv?.setOnClickListener {
+//            findNavController().navigate(R.id.action_home_to_PokemonDetails)
+//        }
         binding?.apiTv?.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_nonPaging)
         }

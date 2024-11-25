@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_home_to_paging"
             app:destination="@id/pagingFragment" />
+        <action
+            android:id="@+id/action_to_PokemonDetails"
+            app:destination="@id/pokemonDetailsFragment" />
     </fragment>
 
     <fragment
@@ -35,5 +38,11 @@
         android:name="com.example.appdemo.ui.apiPaging.PokemonDataPagingFragment"
         android:label="paging Fragment"
         tools:layout="@layout/fragment_pokemon_data_paging" />
+
+    <fragment
+        android:id="@+id/pokemonDetailsFragment"
+        android:name="com.example.appdemo.ui.apiNonPaging.PokemonDetailsFragment"
+        android:label="Pokemon Details Fragment"
+        tools:layout="@layout/fragment_pokemon_details" />
 </navigation>
 

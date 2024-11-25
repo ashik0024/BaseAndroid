@@ -1,6 +1,8 @@
 package com.example.appdemo.network.retrofit
 
+import com.example.appdemo.network.responseClass.PokemonInfo
 import com.example.appdemo.network.responseClass.PokemonListResponse
+import com.example.appdemo.network.responseClass.pokemonItem.PokemonDetails
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -15,5 +17,11 @@ interface ApiInterface {
     @Query("limit") limit: Int,
     @Query("offset") offset: Int
     ): PokemonListResponse
+
+
+    @GET("pokemon/{pokemonNameOrId}")
+    suspend fun getPokemonDetails(
+        @Path("pokemonNameOrId") pokemonNameOrId:String,
+    ): PokemonInfo
 
 }

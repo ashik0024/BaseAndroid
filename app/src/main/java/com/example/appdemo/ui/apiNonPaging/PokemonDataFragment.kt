@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.appdemo.R
 import com.example.appdemo.network.repository.GetPokemonService
 import com.example.appdemo.network.responseClass.Pokemon
 import com.example.appdemo.databinding.FragmentPokemonDataBinding
@@ -83,5 +85,10 @@ class PokemonDataFragment : Fragment(), BaseListItemCallback<Pokemon> {
 
     override fun onItemClicked(item: Pokemon) {
         super.onItemClicked(item)
+        val bundleData = Bundle().apply {
+            putString("name", item.name)
+            putString("id",item.id.toString())
+        }
+        findNavController().navigate(R.id.action_to_PokemonDetails,bundleData)
     }
 }
