@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <!-- Set the item text and icon appearance -->
+        <item name="itemIconTint">@android:color/black</item> <!-- Optional: to change icon color -->
+        <item name="itemTextColor">@android:color/black</item> <!-- Optional: to change text color -->
+        <!-- Adjust text and icon layout -->
+        <item name="itemHorizontalTranslationEnabled">false</item> <!-- Optional: to disable item animations -->
+        <item name="labelVisibilityMode">unlabeled</item> <!-- Optional: can be 'auto' or 'labeled' -->
+    </style>
+
+</resources>

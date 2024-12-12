@@ -1,0 +1,22 @@
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFE5E5E5" /> <!-- Background color -->
+        </shape>
+    </item>
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape android:shape="rectangle">
+                <solid android:color="#FFFDD2D2" /> <!-- Secondary progress color -->
+            </shape>
+        </clip>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <solid android:color="#FFFF0000" /> <!-- Primary progress (red) -->
+            </shape>
+        </clip>
+    </item>
+</layer-list>

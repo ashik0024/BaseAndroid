@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_to_PokemonDetails"
             app:destination="@id/pokemonDetailsFragment" />
+        <action
+            android:id="@+id/action_to_player"
+            app:destination="@id/playerFrag" />
     </fragment>
 
     <fragment
@@ -44,5 +47,11 @@
         android:name="com.example.appdemo.ui.apiNonPaging.PokemonDetailsFragment"
         android:label="Pokemon Details Fragment"
         tools:layout="@layout/fragment_pokemon_details" />
+
+    <fragment
+        android:id="@+id/playerFrag"
+        android:name="com.example.appdemo.ui.player.PlayerFragment"
+        android:label="Player"
+        tools:layout="@layout/fragment_player" />
 </navigation>
 

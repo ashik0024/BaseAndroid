@@ -37,5 +37,8 @@ class HomeFragment : Fragment() {
         binding?.pagingApiTv?.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_paging)
         }
+        binding?.player?.setOnClickListener {
+            findNavController().navigate(R.id.action_to_player)
+        }
     }
 }

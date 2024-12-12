@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.AppDemo" parent="Base.Theme.AppDemo" />
+    <style name="PlayerSettingsDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_right_to_left</item>
+        <item name="android:windowExitAnimation">@anim/slide_left_to_right</item>
+    </style>
 </resources>
