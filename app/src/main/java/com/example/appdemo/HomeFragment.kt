@@ -40,5 +40,9 @@ class HomeFragment : Fragment() {
         binding?.player?.setOnClickListener {
             findNavController().navigate(R.id.action_to_player)
         }
+
+        binding?.service?.setOnClickListener {
+            findNavController().navigate(R.id.action_to_service)
+        }
     }
 }

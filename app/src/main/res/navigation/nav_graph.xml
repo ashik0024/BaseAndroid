@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_to_player"
             app:destination="@id/playerFrag" />
+        <action
+            android:id="@+id/action_to_service"
+            app:destination="@id/serviceFrag" />
     </fragment>
 
     <fragment
@@ -53,5 +56,10 @@
         android:name="com.example.appdemo.ui.player.PlayerFragment"
         android:label="Player"
         tools:layout="@layout/fragment_player" />
+    <fragment
+        android:id="@+id/serviceFrag"
+        android:name="com.example.appdemo.Services.ServiceFragment"
+        android:label="Service"
+        tools:layout="@layout/fragment_service" />
 </navigation>
 

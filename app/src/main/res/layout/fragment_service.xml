@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".Services.ServiceFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,10 +15,10 @@
 
 
         <TextView
-            android:id="@+id/roomTv"
+            android:id="@+id/foreground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Room"
+            android:text="Foreground"
             android:background="@drawable/border_background"
             android:padding="12dp"
             android:textSize="16sp"
@@ -26,43 +26,25 @@
 
 
         <TextView
-            android:id="@+id/apiTv"
+            android:id="@+id/background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Api"
+            android:text="Background"
             android:background="@drawable/border_background"
             android:padding="12dp"
             android:textSize="16sp"
             android:layout_marginBottom="8dp" />
 
         <TextView
-            android:id="@+id/pagingApiTv"
+            android:id="@+id/bound"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Paging Api"
-            android:background="@drawable/border_background"
-            android:padding="12dp"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
-        <TextView
-            android:id="@+id/player"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Player"
+            android:text="Bound"
             android:background="@drawable/border_background"
             android:padding="12dp"
             android:textSize="16sp"
             android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:id="@+id/service"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Service"
-            android:background="@drawable/border_background"
-            android:padding="12dp"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
